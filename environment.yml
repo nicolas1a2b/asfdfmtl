@@ -18,3 +18,4 @@ dependencies:
       - black==24.8.0
       - flake8==7.1.1
       - torchmetrics==1.4.1
+      - gdown==5.2.0
