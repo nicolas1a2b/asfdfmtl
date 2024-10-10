@@ -643,7 +643,7 @@ def process_across_all_experiments(
     _plot_result_table(dataset, avg_results_per_experiment, plot_folder, task)
 
 
-def load_saved_models_of_experiment(paths):
+def load_saved_models_of_experiment(paths, device):
     """Load the saved models of an experiment.
 
     Args:
@@ -657,7 +657,7 @@ def load_saved_models_of_experiment(paths):
     for path in paths:
         print(f"Loaded {path}")
         with open(path, "rb") as f:
-            c = torch.load(f)
+            c = torch.load(f, map_location=torch.device(device))
         results.append(c)
     return results
 
@@ -744,8 +744,8 @@ def main():
             for f in sorted(os.listdir(os.path.join(path, t2)))
             if os.path.isfile(os.path.join(path, t2, f))
         ]
-        results_t1[name] = load_saved_models_of_experiment(file_paths_t1)
-        results_t2[name] = load_saved_models_of_experiment(file_paths_t2)
+        results_t1[name] = load_saved_models_of_experiment(file_paths_t1, device)
+        results_t2[name] = load_saved_models_of_experiment(file_paths_t2, device)
 
         # Plot and Create the Table an experiment and task 1.
         process_experiment_and_task(
