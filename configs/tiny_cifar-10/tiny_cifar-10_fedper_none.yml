@@ -1,0 +1,27 @@
+general: # This config is only meant for the testing the installation
+  title: Tiny_Cifar-10_FedPer_None
+  dataset: cifar10
+  intra_communication: FedPer # Communication Scheme within a task group
+  cross_communication: None # Communication Scheme across task groups
+  rounds: 2 # Number of aggregation rounds
+  result_folder: results
+  result_sub_folder: tiny_cifar-10
+  seed: 3 # Seed to benefit reproducibility
+  backbone_layers: minus1 # Indicates that the last block of the torchvision resnet18, will be added to the privatized head
+  
+setup:
+  dataset_fraction: 0.5 # Specified how much of the dataset shall be used within the whole federation. 
+  hca_alpha: 0.4 # Hyperparameter of HCA proposed in FedHCA2 (https://github.com/innovator-zero/FedHCA2). Only affects FedPer-HCA configuration.
+  tasks: # Defines two task groups, Animals and Objects. 
+    - task: Animals
+      epochs: 2 # Defines how many epochs per aggregation round. Total epochs = epochs * rounds
+      clients: # Defines how many clients shall be created per task groups
+        - AN_Cifar10_C0
+        - AN_Cifar10_C1
+        - AN_Cifar10_C2
+    - task: Objects
+      epochs: 2
+      clients: 
+        - OB_Cifar10_C0
+        - OB_Cifar10_C1
+        - OB_Cifar10_C2
