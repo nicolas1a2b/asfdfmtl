@@ -23,7 +23,7 @@ Two main inspirations for the framework were FedPer and FedHCA2:
     ```
     conda activate asfdfmtl
     ```
-4) If you want to train on **GPU** install CUDA support. (highly recommended - Code was **not** tested on CPU!)
+4) If you want to train on a **GPU** install CUDA support. For this to work you need the appropriate hardware and CUDA toolkit. More information can be found here: [https://developer.nvidia.com/cuda-toolkit](https://developer.nvidia.com/cuda-toolkit). Note that training on a GPU is highly recommended - Code was **not** tested on CPU!
     ```
     conda install pytorch-cuda=12.1 -c nvidia
     ```
